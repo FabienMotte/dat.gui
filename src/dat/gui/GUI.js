@@ -495,6 +495,20 @@ common.extend(
       );
     },
 
+    addLabel: function (property) {
+      const object = {};
+      object[property] = '';
+
+      return add(
+        this,
+        object,
+        property,
+        {
+          label: true
+        }
+      );
+    },
+
     /**
      * @param controller
      * @instance
@@ -998,6 +1012,10 @@ function add(gui, object, property, params) {
   const name = document.createElement('span');
   dom.addClass(name, 'property-name');
   name.innerHTML = controller.property;
+
+  if (params.label) {
+    name.style.width = '100%';
+  }
 
   const container = document.createElement('div');
   container.appendChild(name);

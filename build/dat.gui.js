@@ -2565,18 +2565,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; /**
-	                                                                                                                                                                                                                                                   * dat-gui JavaScript Controller Library
-	                                                                                                                                                                                                                                                   * http://code.google.com/p/dat-gui
-	                                                                                                                                                                                                                                                   *
-	                                                                                                                                                                                                                                                   * Copyright 2011 Data Arts Team, Google Creative Lab
-	                                                                                                                                                                                                                                                   *
-	                                                                                                                                                                                                                                                   * Licensed under the Apache License, Version 2.0 (the "License");
-	                                                                                                                                                                                                                                                   * you may not use this file except in compliance with the License.
-	                                                                                                                                                                                                                                                   * You may obtain a copy of the License at
-	                                                                                                                                                                                                                                                   *
-	                                                                                                                                                                                                                                                   * http://www.apache.org/licenses/LICENSE-2.0
-	                                                                                                                                                                                                                                                   */
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
+	                                                                                                                                                                                                                                                                               * dat-gui JavaScript Controller Library
+	                                                                                                                                                                                                                                                                               * http://code.google.com/p/dat-gui
+	                                                                                                                                                                                                                                                                               *
+	                                                                                                                                                                                                                                                                               * Copyright 2011 Data Arts Team, Google Creative Lab
+	                                                                                                                                                                                                                                                                               *
+	                                                                                                                                                                                                                                                                               * Licensed under the Apache License, Version 2.0 (the "License");
+	                                                                                                                                                                                                                                                                               * you may not use this file except in compliance with the License.
+	                                                                                                                                                                                                                                                                               * You may obtain a copy of the License at
+	                                                                                                                                                                                                                                                                               *
+	                                                                                                                                                                                                                                                                               * http://www.apache.org/licenses/LICENSE-2.0
+	                                                                                                                                                                                                                                                                               */
 	
 	var _css = __webpack_require__(18);
 	
@@ -3091,6 +3091,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 	  },
 	
+	  addLabel: function addLabel(property) {
+	    var object = {};
+	    object[property] = '';
+	
+	    return _add(this, object, property, {
+	      label: true
+	    });
+	  },
+	
 	  /**
 	   * @param controller
 	   * @instance
@@ -3579,6 +3588,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var name = document.createElement('span');
 	  _dom2.default.addClass(name, 'property-name');
 	  name.innerHTML = controller.property;
+	
+	  if (params.label) {
+	    name.style.width = '100%';
+	  }
 	
 	  var container = document.createElement('div');
 	  container.appendChild(name);
