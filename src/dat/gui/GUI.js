@@ -528,6 +528,8 @@ common.extend(
         autoPlaceContainer.removeChild(this.domElement);
       }
 
+      this.removeAllFolders();
+
       dom.unbind(window, 'keydown', GUI._keydownHandler, false);
       dom.unbind(window, 'resize', this.__resizeHandler);
 
@@ -575,6 +577,21 @@ common.extend(
       const li = addRow(this, gui.domElement);
       dom.addClass(li, 'folder');
       return gui;
+    },
+
+    removeFolder: function (name) {
+      if (this.__folders[name] === 'undefined') {
+        throw new Error('The folder named "' + name + '" does not exist');
+      }
+
+      this.__folders[name].domElement.remove();
+      delete this.__folders[name];
+    },
+
+    removeAllFolders: function () {
+      common.each(this.__folders, function (folder) {
+        this.removeFolder(folder.name);
+      }.bind(this));
     },
 
     open: function() {
@@ -1149,7 +1166,7 @@ function addSaveMenu(gui) {
   });
 
   dom.bind(button2, 'click', function() {
-    const presetName = prompt('Enter a new preset name.');
+    const presetName = prompt('Enter a new preset name.'); // eslint-disable-line
     if (presetName) {
       gui.saveAs(presetName);
     }

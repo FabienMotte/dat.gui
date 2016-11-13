@@ -76,7 +76,7 @@ const Common = {
         }
       }
     } else {
-      for (const key in obj) {
+      for (const key in obj) { // eslint-disable-line
         if (itr.call(scope, obj[key], key) === this.BREAK) {
           return;
         }

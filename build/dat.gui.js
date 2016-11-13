@@ -769,6 +769,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    } else {
 	      for (var _key in obj) {
+	        // eslint-disable-line
 	        if (itr.call(scope, obj[_key], _key) === this.BREAK) {
 	          return;
 	        }
@@ -3119,6 +3120,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      autoPlaceContainer.removeChild(this.domElement);
 	    }
 	
+	    this.removeAllFolders();
+	
 	    _dom2.default.unbind(window, 'keydown', GUI._keydownHandler, false);
 	    _dom2.default.unbind(window, 'resize', this.__resizeHandler);
 	
@@ -3166,6 +3169,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var li = addRow(this, gui.domElement);
 	    _dom2.default.addClass(li, 'folder');
 	    return gui;
+	  },
+	
+	  removeFolder: function removeFolder(name) {
+	    if (this.__folders[name] === 'undefined') {
+	      throw new Error('The folder named "' + name + '" does not exist');
+	    }
+	
+	    this.__folders[name].domElement.remove();
+	    delete this.__folders[name];
+	  },
+	
+	  removeAllFolders: function removeAllFolders() {
+	    _common2.default.each(this.__folders, function (folder) {
+	      this.removeFolder(folder.name);
+	    }.bind(this));
 	  },
 	
 	  open: function open() {
@@ -3727,7 +3745,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	
 	  _dom2.default.bind(button2, 'click', function () {
-	    var presetName = prompt('Enter a new preset name.');
+	    var presetName = prompt('Enter a new preset name.'); // eslint-disable-line
 	    if (presetName) {
 	      gui.saveAs(presetName);
 	    }
